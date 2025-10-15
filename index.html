@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>One-Page Sites that Convert</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:rgba(13,18,33,.62);
+      --text:#e6edf3;
+      --muted:#aab6c3;
+      --accent:#9bb5ff;
+      --border:rgba(255,255,255,.08);
+      --header:rgba(10,14,24,.78);
+      --cta:#a1ff9b;
+    }
+    html, body { height:100%; }
+    body {
+      margin:0; font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color:var(--text); background:var(--bg); scroll-behavior:smooth;
+    }
+    a { color:var(--accent); text-decoration:none; }
+    canvas { position:fixed; inset:0; width:100%; height:100%; display:block; z-index:0; }
+
+    header {
+      position:fixed; top:0; left:0; right:0; z-index:10;
+      background:var(--header); backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .wrap { max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:20px; }
+    .brand { font-weight:700; letter-spacing:.3px; color:#fff; }
+    nav { margin-left:auto; display:flex; gap:14px; flex-wrap:wrap; }
+    nav a { padding:8px 12px; border-radius:10px; border:1px solid transparent; color:var(--text); }
+    nav a:hover { border-color:var(--border); background:rgba(255,255,255,.03); color:var(--accent); }
+
+    section {
+      position:relative; z-index:1; min-height:100vh; display:grid; place-items:center;
+      padding:120px 20px 70px; scroll-margin-top:90px;
+    }
+    .card {
+      width:min(980px,100%); background:var(--panel); border:1px solid var(--border);
+      border-radius:18px; padding:clamp(22px,4vw,36px); box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    h1 { margin:0 0 10px; font-size:clamp(30px,5vw,46px); }
+    h2 { margin:0 0 8px; font-size:clamp(22px,4vw,30px); }
+    p { margin:10px 0 0; color:var(--muted); }
+
+    .hero { text-align:center; }
+    .cta-row { margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .btn {
+      display:inline-block; padding:12px 16px; border-radius:12px; border:1px solid var(--border);
+      background:rgba(255,255,255,.05); color:#fff; font-weight:600;
+    }
+    .btn:hover { background:rgba(255,255,255,.08); }
+    .btn-primary {
+      background:linear-gradient(180deg, var(--cta), #7cff74);
+      color:#0b0f14; border-color:transparent;
+    }
+    .btn-primary:hover { filter:brightness(0.95); }
+
+    .grid { margin-top:16px; display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+    .tile { background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:14px; padding:14px; }
+    .muted { color:var(--muted); }
+
+    .mock {
+      aspect-ratio: 16/10; border-radius:10px; border:1px solid var(--border); overflow:hidden;
+      display:grid; place-items:center; background:rgba(255,255,255,.03); margin-bottom:8px;
+    }
+    .badges { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .badge { font-size:12px; padding:6px 8px; border-radius:10px; border:1px solid var(--border); background:rgba(255,255,255,.03); color:var(--muted); }
+
+    .list { margin-top:10px; display:grid; gap:10px; }
+    .row { display:flex; gap:10px; align-items:flex-start; }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--accent); margin-top:8px; flex:0 0 8px; }
+
+    .hint {
+      position:fixed; left:12px; bottom:12px; z-index:2; color:var(--muted);
+      font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; opacity:.85;
+      background:rgba(255,255,255,.04); padding:6px 10px; border-radius:10px; border:1px solid var(--border);
+      user-select:none;
+    }
+    @media (max-width:520px){ nav{margin-left:0} .wrap{flex-wrap:wrap} }
+    @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+  </style>
+</head>
+<body>
+  <canvas id="c" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="wrap">
+      <div class="brand">Your Studio</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#value">Why One-Page</a>
+        <a href="#process">Process</a>
+        <a href="#projects">Examples</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contacts">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="card hero">
+      <h1>One-Page Sites that convert</h1>
+      <p>Launch fast. Clear message. Clean design. Built to capture leads and validate ideas.</p>
+      <div class="badges" style="justify-content:center">
+        <span class="badge">1–2 weeks</span>
+        <span class="badge">Mobile-first</span>
+        <span class="badge">SEO-ready</span>
+        <span class="badge">Analytics</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contacts">Get a quote</a>
+        <a class="btn" href="#projects">See examples</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section id="value">
+    <div class="card">
+      <h2>Why a single-page site?</h2>
+      <div class="grid">
+        <div class="tile">
+          <div class="row"><span class="dot"></span><div>
+            <strong>Focus on one goal</strong>
+            <p class="muted">No clutter. One story, one CTA — higher conversions.</p>
+          </div></div>
+        </div>
+        <div class="tile">
+          <div class="row"><span class="dot"></span><div>
+            <strong>Fast delivery</strong>
+            <p class="muted">From brief to launch in days, not months.</p>
+          </div></div>
+        </div>
+        <div class="tile">
+          <div class="row"><span class="dot"></span><div>
+            <strong>Easy to iterate</strong>
+            <p class="muted">Test messaging, pricing, and visuals quickly.</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="card">
+      <h2>Process</h2>
+      <div class="list">
+        <div class="row"><span class="dot"></span><div><strong>Brief (30–45 min)</strong><br><span class="muted">Goals, audience, offer, references.</span></div></div>
+        <div class="row"><span class="dot"></span><div><strong>Copy & wireframe</strong><br><span class="muted">Clear narrative + sections that sell.</span></div></div>
+        <div class="row"><span class="dot"></span><div><strong>Design & build</strong><br><span class="muted">Responsive layout, animations, forms, analytics.</span></div></div>
+        <div class="row"><span class="dot"></span><div><strong>Launch & measure</strong><br><span class="muted">Deploy, connect domain, track KPIs.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLES / MOCKS -->
+  <section id="projects">
+    <div class="card">
+      <h2>Example one-pagers</h2>
+      <div class="grid">
+        <div class="tile">
+          <div class="mock">
+            <!-- Условное превью -->
+            <svg viewBox="0 0 400 250" width="100%" height="100%" aria-hidden="true">
+              <rect width="400" height="250" fill="rgba(255,255,255,.03)"/>
+              <rect x="20" y="20" width="360" height="60" rx="8" fill="rgba(255,255,255,.08)"/>
+              <rect x="20" y="100" width="220" height="16" rx="4" fill="rgba(255,255,255,.08)"/>
+              <rect x="20" y="124" width="180" height="16" rx="4" fill="rgba(255,255,255,.08)"/>
+              <rect x="20" y="180" width="120" height="28" rx="6" fill="rgba(161,255,155,.9)"/>
+            </svg>
+          </div>
+          <strong>SaaS Landing</strong>
+          <p class="muted">Hero + features + pricing + FAQ</p>
+        </div>
+
+        <div class="tile">
+          <div class="mock">
+            <svg viewBox="0 0 400 250" width="100%" height="100%" aria-hidden="true">
+              <rect width="400" height="250" fill="rgba(255,255,255,.03)"/>
+              <rect x="20" y="20" width="180" height="180" rx="10" fill="rgba(255,255,255,.08)"/>
+              <rect x="220" y="30" width="160" height="16" rx="4" fill="rgba(255,255,255,.08)"/>
+              <rect x="220" y="56" width="140" height="16" rx="4" fill="rgba(255,255,255,.08)"/>
+              <rect x="220" y="190" width="120" height="28" rx="6" fill="rgba(161,255,155,.9)"/>
+            </svg>
+          </div>
+          <strong>Local Service</strong>
+          <p class="muted">Offer + reviews + contact form</p>
+        </div>
+
+        <div class="tile">
+          <div class="mock">
+            <svg viewBox="0 0 400 250" width="100%" height="100%" aria-hidden="true">
+              <rect width="400" height="250" fill="rgba(255,255,255,.03)"/>
+              <rect x="20" y="20" width="360" height="40" rx="8" fill="rgba(255,255,255,.08)"/>
+              <rect x="20" y="80" width="100" height="100" rx="8" fill="rgba(255,255,255,.08)"/>
+              <rect x="140" y="80" width="100" height="100" rx="8" fill="rgba(255,255,255,.08)"/>
+              <rect x="260" y="80" width="100" height="100" rx="8" fill="rgba(255,255,255,.08)"/>
+            </svg>
+          </div>
+          <strong>Portfolio</strong>
+          <p class="muted">Grid of works + simple case notes</p>
+        </div>
+      </div>
+      <div class="cta-row" style="margin-top:14px">
+        <a class="btn" href="#contacts">Discuss your page</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING (простая стартовая) -->
+  <section id="pricing">
+    <div class="card">
+      <h2>Starter pricing</h2>
+      <div class="grid">
+        <div class="tile">
+          <strong>Launch</strong>
+          <p class="muted">Copy, design, build, deploy</p>
+          <div class="badges"><span class="badge">3–5 sections</span><span class="badge">1 form</span></div>
+        </div>
+        <div class="tile">
+          <strong>Grow</strong>
+          <p class="muted">A/B tweaks, speed, SEO basics</p>
+          <div class="badges"><span class="badge">2 iterations</span><span class="badge">Analytics</span></div>
+        </div>
+        <div class="tile">
+          <strong>Extras</strong>
+          <p class="muted">Domain, email, automation</p>
+          <div class="badges"><span class="badge">Optional</span></div>
+        </div>
+      </div>
+      <div class="cta-row" style="margin-top:14px">
+        <a class="btn btn-primary" href="#contacts">Request a proposal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section id="contacts">
+    <div class="card">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
+      <p>WhatsApp: <a href="https://wa.me/34685391213" rel="noopener">+34&nbsp;685&nbsp;391&nbsp;213</a></p>
+      <p class="muted">Send 3–5 bullets (goal, audience, budget range, timing). We’ll reply with a plan and ETA.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://wa.me/34685391213">Chat on WhatsApp</a>
+        <a class="btn" href="#home">Back to top</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hint">move mouse • click — add point • double click — reset</div>
+
+  <script>
+    // ===== Interactive dots (window listeners to work through content) =====
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d', { alpha: false });
+
+    function resize() {
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      canvas.width  = Math.floor(canvas.clientWidth  * dpr);
+      canvas.height = Math.floor(canvas.clientHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    addEventListener('resize', resize, { passive: true });
+    resize();
+
+    const P = [];
+    const settings = {
+      count: 120,
+      maxSpeed: 0.55,
+      radius: 2.0,
+      linkDist: 120,
+      mouseRepelDist: 110,
+      mouseRepelForce: 0.06,
+      friction: 0.996,
+      bg: getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#0b1020',
+      linkRGBA: (a)=>`rgba(140,170,255,${a * 0.38})`,
+      dot: '#e8f0ff'
+    };
+    const rand = (a, b) => a + Math.random() * (b - a);
+
+    function spawn(n = settings.count) {
+      for (let i = 0; i < n; i++) {
+        P.push({
+          x: rand(0, canvas.clientWidth),
+          y: rand(0, canvas.clientHeight),
+          vx: rand(-settings.maxSpeed, settings.maxSpeed),
+          vy: rand(-settings.maxSpeed, settings.maxSpeed)
+        });
+      }
+    }
+    spawn();
+
+    const mouse = { x: null, y: null, active: false };
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true;
+    }, { passive: true });
+    window.addEventListener('mouseleave', () => (mouse.active = false), { passive:true });
+    window.addEventListener('click', e => {
+      P.push({ x: e.clientX, y: e.clientY,
+               vx: rand(-settings.maxSpeed, settings.maxSpeed),
+               vy: rand(-settings.maxSpeed, settings.maxSpeed) });
+    }, { passive:true });
+    window.addEventListener('dblclick', () => { P.length = 0; spawn(60); }, { passive:true });
+
+    function step() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+
+      for (const p of P) {
+        if (mouse.active) {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y;
+          const d2 = dx*dx + dy*dy, r = settings.mouseRepelDist;
+          if (d2 < r*r && d2 > 0.0001) {
+            const inv = 1 / Math.sqrt(d2);
+            p.vx += (dx * inv) * settings.mouseRepelForce;
+            p.vy += (dy * inv) * settings.mouseRepelForce;
+          }
+        }
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= settings.friction; p.vy *= settings.friction;
+
+        if (p.x < -5) p.x = w + 5; if (p.x > w + 5) p.x = -5;
+        if (p.y < -5) p.y = h + 5; if (p.y > h + 5) p.y = -5;
+      }
+
+      ctx.fillStyle = settings.bg; ctx.fillRect(0, 0, w, h);
+
+      ctx.lineWidth = 1;
+      for (let i = 0; i < P.length; i++) {
+        for (let j = i + 1; j < P.length; j++) {
+          const a = P[i], b = P[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx*dx + dy*dy, r2 = settings.linkDist * settings.linkDist;
+          if (d2 < r2) {
+            const alpha = 1 - d2 / r2;
+            ctx.strokeStyle = settings.linkRGBA(alpha);
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+
+      ctx.fillStyle = settings.dot;
+      for (const p of P) { ctx.beginPath(); ctx.arc(p.x, p.y, settings.radius, 0, Math.PI*2); ctx.fill(); }
+
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  </script>
+</body>
+</html>
