@@ -97,7 +97,7 @@ requestAnimationFrame(step);
 (function enableLogoAutoScroll(){
   const track = document.querySelector('.logos-track');
   if (!track) return;
-  const needsScroll = () => track.scrollWidth > track.clientWidth + 8;
+  const needsScroll = () => track.scrollWidth > track.clientWidth + 1;
   let rafId = null;
   let paused = false;
 
@@ -106,18 +106,12 @@ requestAnimationFrame(step);
     if (!isMobile || !needsScroll()) { stop(); track.classList.remove('auto'); return; }
     if (rafId) return;
     track.classList.add('auto');
-    if (!track.dataset.duped) {
-      const clones = Array.from(track.children).map(n => n.cloneNode(true));
-      clones.forEach(c => track.appendChild(c));
-      track.dataset.duped = '1';
-    }
-    const speed = 0.6; // px per frame for mobile
+    const speed = 0.5; // px per frame
+    const max = () => Math.max(1, track.scrollWidth - track.clientWidth);
     const loop = () => {
-      if (!paused) {
-        track.scrollLeft += speed;
-        if (track.scrollLeft >= (track.scrollWidth / 2)) {
-          track.scrollLeft = 0;
-        }
+      if (!paused && needsScroll()) {
+        const m = max();
+        track.scrollLeft = (track.scrollLeft + speed) % m;
       }
       rafId = requestAnimationFrame(loop);
     };
