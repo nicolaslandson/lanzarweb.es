@@ -102,16 +102,16 @@ requestAnimationFrame(step);
   let paused = false;
 
   function start() {
-    if (!needsScroll()) { stop(); track.classList.remove('auto'); return; }
+    const isMobile = window.matchMedia('(max-width: 720px)').matches;
+    if (!isMobile || !needsScroll()) { stop(); track.classList.remove('auto'); return; }
     if (rafId) return;
     track.classList.add('auto');
-    // Duplicate children to allow seamless loop
     if (!track.dataset.duped) {
       const clones = Array.from(track.children).map(n => n.cloneNode(true));
       clones.forEach(c => track.appendChild(c));
       track.dataset.duped = '1';
     }
-    const speed = 0.4; // px per frame
+    const speed = 0.6; // px per frame for mobile
     const loop = () => {
       if (!paused) {
         track.scrollLeft += speed;
