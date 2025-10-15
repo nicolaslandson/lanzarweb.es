@@ -92,3 +92,46 @@ function step() {
   requestAnimationFrame(step);
 }
 requestAnimationFrame(step);
+
+// ===== Auto-scroll logos on overflow (mobile/compact) =====
+(function enableLogoAutoScroll(){
+  const track = document.querySelector('.logos-track');
+  if (!track) return;
+  const needsScroll = () => track.scrollWidth > track.clientWidth + 8;
+  let rafId = null;
+  let paused = false;
+
+  function start() {
+    if (!needsScroll()) { stop(); track.classList.remove('auto'); return; }
+    if (rafId) return;
+    track.classList.add('auto');
+    // Duplicate children to allow seamless loop
+    if (!track.dataset.duped) {
+      const clones = Array.from(track.children).map(n => n.cloneNode(true));
+      clones.forEach(c => track.appendChild(c));
+      track.dataset.duped = '1';
+    }
+    const speed = 0.4; // px per frame
+    const loop = () => {
+      if (!paused) {
+        track.scrollLeft += speed;
+        if (track.scrollLeft >= (track.scrollWidth / 2)) {
+          track.scrollLeft = 0;
+        }
+      }
+      rafId = requestAnimationFrame(loop);
+    };
+    rafId = requestAnimationFrame(loop);
+  }
+  function stop(){ if (rafId){ cancelAnimationFrame(rafId); rafId = null; } }
+
+  const ro = new ResizeObserver(() => { stop(); start(); });
+  ro.observe(track);
+  window.addEventListener('orientationchange', () => { stop(); start(); }, { passive:true });
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => paused = false);
+  track.addEventListener('touchstart', () => paused = true, { passive:true });
+  track.addEventListener('touchend', () => paused = false, { passive:true });
+
+  start();
+})();
