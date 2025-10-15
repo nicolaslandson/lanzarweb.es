@@ -104,13 +104,14 @@
     .logos {
       width:min(980px,100%);
       margin:18px auto 0;
-      padding:12px;
-      background:rgba(255,255,255,.04);
+      padding:14px;
+      background:rgba(255,255,255,.08);
       border:1px solid var(--border);
       border-radius:14px;
+      overflow:hidden;
     }
     .logos-track {
-      display:flex; gap:22px; align-items:center;
+      display:flex; gap:18px; align-items:center;
       overflow-x:auto; overflow-y:hidden;
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
@@ -118,13 +119,13 @@
     }
     .logos-track::-webkit-scrollbar { height:6px }
     .logos-track::-webkit-scrollbar-thumb { background:rgba(255,255,255,.12); border-radius:10px }
-    .logo-item { flex:0 0 auto; scroll-snap-align:start; opacity:.9; filter:grayscale(100%) contrast(1.05); transition:filter .2s, opacity .2s }
+    .logo-item { flex:0 0 auto; scroll-snap-align:start; opacity:.95; padding:8px 12px; background:rgba(255,255,255,.10); border:1px solid var(--border); border-radius:10px; filter:grayscale(100%) brightness(1.6) contrast(1.2); transition:filter .2s, opacity .2s }
     .logo-item:hover { filter:none; opacity:1 }
-    .logo-item img { height:36px; width:auto; display:block }
+    .logo-item img { height:28px; max-width:160px; width:auto; display:block; object-fit:contain }
     @media (min-width:720px){
-      .logos-track { overflow:visible; justify-content:space-between }
+      .logos-track { overflow:hidden; justify-content:space-between }
       .logo-item { scroll-snap-align:unset }
-      .logo-item img { height:40px }
+      .logo-item img { height:34px }
     }
     @media (max-width:520px){ nav{margin-left:0} .wrap{flex-wrap:wrap} }
     @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
