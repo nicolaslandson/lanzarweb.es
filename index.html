@@ -90,6 +90,42 @@
       background:rgba(255,255,255,.04); padding:6px 10px; border-radius:10px; border:1px solid var(--border);
       user-select:none;
     }
+    .fab {
+      position:fixed; right:16px; bottom:16px; z-index:20;
+      width:56px; height:56px; border-radius:50%;
+      display:grid; place-items:center;
+      background:#25D366; color:#0b0f14;
+      border:1px solid var(--border);
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
+    }
+    .fab:hover { filter:brightness(0.95); }
+    .fab svg { width:26px; height:26px; }
+    /* Logos strip */
+    .logos {
+      width:min(980px,100%);
+      margin:18px auto 0;
+      padding:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+    .logos-track {
+      display:flex; gap:22px; align-items:center;
+      overflow-x:auto; overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:4px;
+    }
+    .logos-track::-webkit-scrollbar { height:6px }
+    .logos-track::-webkit-scrollbar-thumb { background:rgba(255,255,255,.12); border-radius:10px }
+    .logo-item { flex:0 0 auto; scroll-snap-align:start; opacity:.9; filter:grayscale(100%) contrast(1.05); transition:filter .2s, opacity .2s }
+    .logo-item:hover { filter:none; opacity:1 }
+    .logo-item img { height:36px; width:auto; display:block }
+    @media (min-width:720px){
+      .logos-track { overflow:visible; justify-content:space-between }
+      .logo-item { scroll-snap-align:unset }
+      .logo-item img { height:40px }
+    }
     @media (max-width:520px){ nav{margin-left:0} .wrap{flex-wrap:wrap} }
     @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
   </style>
@@ -151,6 +187,18 @@
             <strong>Fácil de iterar</strong>
             <p class="muted">Iteraciones rápidas: copy, secciones, oferta y visuales.</p>
           </div></div>
+        </div>
+      </div>
+      <!-- Logos strip -->
+      <div class="logos" aria-label="Logotipos de clientes">
+        <div class="logos-track">
+          <a class="logo-item" href="#" aria-label="Logo 1"><img src="1.png" alt="Cliente 1" loading="lazy"></a>
+          <a class="logo-item" href="#" aria-label="Logo 2"><img src="2.png" alt="Cliente 2" loading="lazy"></a>
+          <a class="logo-item" href="#" aria-label="Logo 3"><img src="3.png" alt="Cliente 3" loading="lazy"></a>
+          <a class="logo-item" href="#" aria-label="Logo 4"><img src="4.png" alt="Cliente 4" loading="lazy"></a>
+          <a class="logo-item" href="#" aria-label="Logo 5"><img src="5.png" alt="Cliente 5" loading="lazy"></a>
+          <a class="logo-item" href="#" aria-label="Logo 6"><img src="6.png" alt="Cliente 6" loading="lazy"></a>
+          <a class="logo-item" href="#" aria-label="Logo 7"><img src="7.png" alt="Cliente 7" loading="lazy"></a>
         </div>
       </div>
     </div>
@@ -265,6 +313,12 @@
   </section>
 
   <div class="hint">mueve el ratón • clic — añadir punto • doble clic — reiniciar</div>
+
+  <a class="fab" href="https://wa.me/34685391213" aria-label="WhatsApp" rel="noopener" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.52 3.48A11.87 11.87 0 0 0 12.06 0C5.46 0 .16 5.3.16 11.86c0 2.09.55 4.12 1.6 5.92L0 24l6.39-1.67a11.8 11.8 0 0 0 5.67 1.45h.01c6.6 0 11.9-5.3 11.9-11.86 0-3.17-1.24-6.14-3.45-8.44ZM12.07 21.2h-.01a9.83 9.83 0 0 1-5-1.36l-.36-.21-3.79 1 1.01-3.68-.24-.38a9.8 9.8 0 0 1-1.56-5.3c0-5.41 4.42-9.81 9.85-9.81 2.63 0 5.1 1.02 6.96 2.87a9.76 9.76 0 0 1 2.89 6.94c0 5.41-4.42 9.8-9.75 9.8Zm5.47-7.34c-.3-.16-1.77-.87-2.05-.97-.27-.1-.48-.16-.68.16-.2.33-.78.97-.95 1.17-.17.2-.35.22-.65.06-.3-.16-1.26-.45-2.4-1.43-.88-.75-1.47-1.68-1.64-1.96-.17-.28-.02-.43.13-.6.14-.14.3-.37.45-.56.15-.18.2-.32.3-.54.1-.22.05-.41-.02-.57-.07-.16-.68-1.64-.93-2.25-.24-.58-.49-.5-.68-.51l-.58-.01c-.2 0-.52.07-.79.36-.27.3-1.03 1-1.03 2.45s1.06 2.84 1.2 3.03c.15.2 2.08 3.17 5.04 4.33.7.3 1.25.48 1.68.61.7.22 1.35.19 1.86.11.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+    </svg>
+  </a>
 
   <script src="script.js"></script>
 </body>
