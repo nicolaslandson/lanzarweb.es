@@ -93,25 +93,26 @@ function step() {
 }
 requestAnimationFrame(step);
 
-// ===== Auto-scroll logos on overflow (mobile/compact) =====
+// ===== Auto-scroll logos (always on, pauses on hover/touch) =====
 (function enableLogoAutoScroll(){
   const track = document.querySelector('.logos-track');
   if (!track) return;
-  const needsScroll = () => track.scrollWidth > track.clientWidth + 1;
   let rafId = null;
   let paused = false;
 
   function start() {
-    const isMobile = window.matchMedia('(max-width: 720px)').matches;
-    if (!isMobile || !needsScroll()) { stop(); track.classList.remove('auto'); return; }
     if (rafId) return;
     track.classList.add('auto');
-    const speed = 0.5; // px per frame
-    const max = () => Math.max(1, track.scrollWidth - track.clientWidth);
+    const speed = 0.4; // px per frame (desktop/mobile alike)
     const loop = () => {
-      if (!paused && needsScroll()) {
-        const m = max();
-        track.scrollLeft = (track.scrollLeft + speed) % m;
+      if (!paused) {
+        const max = Math.max(1, track.scrollWidth - track.clientWidth);
+        if (max > 1) {
+          track.scrollLeft = (track.scrollLeft + speed) % max;
+        } else {
+          // если не переполнение — двигаем слегка туда‑сюда
+          track.scrollLeft = 0;
+        }
       }
       rafId = requestAnimationFrame(loop);
     };
@@ -121,7 +122,6 @@ requestAnimationFrame(step);
 
   const ro = new ResizeObserver(() => { stop(); start(); });
   ro.observe(track);
-  window.addEventListener('orientationchange', () => { stop(); start(); }, { passive:true });
   track.addEventListener('mouseenter', () => paused = true);
   track.addEventListener('mouseleave', () => paused = false);
   track.addEventListener('touchstart', () => paused = true, { passive:true });
